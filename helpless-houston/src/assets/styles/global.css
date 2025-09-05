@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #AC52FF;
+    --color-accent: #E6BA9E;
+    --color-gold: #DFA985;
+}
+/* Fonts */
+@font-face {
+    font-family: 'Satoshi Black';
+    src: url('/fonts/Satoshi-Variable.ttf') format('truetype') ;
+    font-weight: 100 900;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('/fonts/RobotoFlex.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('/fonts/RobotoFlex-Variable.ttf') format('truetype');
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('/fonts/Dm-Sans.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
+h2{
+    font-family: 'Satoshi Black';
+    font-weight: 900;
+    font-size: 44px;
+    color: #DFA985;
+}
+.font-satoshi-black{
+    font-family: 'Satoshi Black';
+    font-weight: 900;
+}
+.font-roboto{
+    font-family: 'Roboto';
+}
+p{
+    color: white;
+}
+.font-dmsans{
+    font-family: 'DM Sans';
+}

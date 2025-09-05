@@ -1,0 +1,67 @@
+---
+import HeroLogo from '../../assets/images/tatt2away-bw.png';
+import HeroBG from '../../assets/images/hero-bg.png';
+import GoldenRing from '../../assets/images/golden-ring.png';
+import HeroImg1 from '../../assets/images/hero-img-1.png'
+import HeroImg2 from '../../assets/images/hero-img-2.png'
+import HeroImg3 from '../../assets/images/hero-img-3.png'
+import { Image } from "astro:assets";
+import Button from '../button.astro';
+---
+<style>
+    .hero-bg {
+        position: absolute;
+        width: 1322px;
+        height: 1322px;
+        border-radius: 1322px;
+        background: radial-gradient(50% 50% at 50% 50%, #41334D 0%, rgba(7, 1, 9, 0.13) 100%);
+        margin-right: 20rem;
+    }
+    .hero-img-border{
+        border-radius: 50%;
+        position: relative;
+        border: 3px solid transparent;
+        background: 
+            linear-gradient(#00000000, #00000000) padding-box,
+            linear-gradient(to bottom, rgba(130, 102, 157, 1), rgba(220, 160, 121, 1)) border-box;
+    }
+
+</style>
+<section class="relative md:max-h-[943px]">
+  <!-- Foreground content -->
+  <div class="relative z-20 flex flex-col items-center justify-center text-center mx-auto md:mt-[180px]">
+    <Image src={HeroLogo} alt="InkOUT Logo" />
+    <h1 class="text-[#DFA985] text-[36px] font-satoshi-black uppercase md:mt-[25px]">
+      Enhance your studio with safe, natural tattoo removal
+    </h1>
+    <p class="text-[28px] md:my-[35px]">
+      Empower Your Tattoo Studio with Tatt2Away’s Non-Laser, <br />
+      All-Natural Ink Removal and Revision Solution.
+    </p>
+    <Button label="Talk to an expert" href="#" variant="secondary"/>
+    <div class="flex md:space-x-[140px]">
+            <Image src={HeroImg1} 
+                alt="" 
+                class="hero-img-border md:mt-[75px] md:h-[173px] md:w-[173px]" />
+            <Image src={HeroImg2} 
+                alt="" 
+                class="hero-img-border md:mt-[116px] md:h-[173px] md:w-[173px]" />
+            <Image src={HeroImg3} 
+                alt="" 
+                class="hero-img-border md:mt-[75px] md:h-[173px] md:w-[173px]" />
+    </div>
+      <!-- Background image -->
+        <div class="absolute -z-10 flex items-center justify-center top-0 md:mt-[320px]">
+        <Image 
+            src={GoldenRing} 
+            alt="Golden Ring Background"
+            class="relative z-10 pointer-events-none" />
+        <Image 
+            src={HeroBG} 
+            alt="purple bg" 
+            class="absolute z-0 md:mt-[29px] pointer-events-none" />
+        </div>
+    <div class="-z-8 hero-bg bottom-0 pointer-events-none" ></div>
+
+  </div>
+</section>
