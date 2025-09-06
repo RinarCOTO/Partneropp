@@ -1,13 +1,51 @@
 ---
-import SafeNatural1 from '../../assets/images/safe-natural-img1.jpg'
+import AccordionBtn from "../AccordionBtn.astro";
+import SafeNatural1 from '../../assets/images/safe-natural-image-1.jpg'
 ---
+
 <section class="p-[80px]">
-  <h2 class="text-center">Safe, Natural Outcomes for Artists and Clients</h2>
-  <div class="mt-[50px]">
-  <div 
-    class="md:h-[500px] md:w-[418px] md:pl-[25px] md:pr-[30px] md:pb-[37px] md:pt-[157px] rounded-3xl bg-cover bg-center" 
-    style={`background-image: url('${SafeNatural1.src}')`}>
-        <p class=" text-white capitalize font-roboto text-[22px] font-[500]">inkOUT harnesses the body's natural healing processes to deliver superior results in fewer sessions. Our methodology has evolved traditional ink removal into an art form—giving you complete control over revisions, replacements, and full pattern disruption for more vibrant coverups.</p>
-  </div>
+  <h2 class="text-center uppercase">
+    Safe, Natural Outcomes for Artists and Clients
+  </h2>
+
+  <div class="mt-[50px] flex flex-col md:flex-row gap-[30px]">
+    <!-- Background image card -->
+    <div 
+      class="flex flex-col justify-end md:h-[500px] md:w-[418px] md:pl-[25px] md:pr-[30px] md:pb-[25px] rounded-3xl bg-cover bg-center" 
+      style={`background-image: url('${SafeNatural1.src}')`}>
+      <p class="text-white capitalize font-roboto text-[22px] font-[500]">
+        Tatt2Away’s non-laser tattoo removal system prioritizes skin integrity and client safety, 
+        avoiding the risks of scarring, pigmentation issues, or tissue damage that can occur with 
+        traditional laser removal. Our proprietary TEPR (Trans-Epidermal Pigment Release) technology 
+        gently lifts ink from the skin, working with the body’s natural healing processes to achieve 
+        predictable, smooth, and natural-looking results.
+      </p>
+    </div>
+
+    <!-- Accordion example -->
+    <div class="flex flex-col flex-1 space-y-[30px]">
+      
+      <AccordionBtn 
+        items={[
+          { text: "Achieve full ink removal in just 3–5 sessions, compared to 8–15 with traditional laser methods. This efficiency allows artists to transform client tattoos faster, enabling vibrant cover-ups or fresh starts with minimal downtime." }]}>
+        <span slot="label">
+          <strong>Complete ink removal in just 3–5 treatments</strong> (vs. 8–15 for traditional methods).
+        </span>
+      </AccordionBtn>
+      <AccordionBtn 
+        items={[
+          { text: "Tatt2Away enables targeted ink removal, allowing artists to modify existing tattoos with precision. Whether enhancing cover-ups or subtly revising designs, our method gives you the freedom to elevate your artistry." }]}>
+        <span slot="label">
+          <strong>Precision ink modification</strong> for artistic evolution of existing work.
+        </span>
+      </AccordionBtn>
+      <AccordionBtn 
+        items={[
+          { text: "Tatt2Away enables targeted ink removal, allowing artists to modify existing tattoos with precision. Whether enhancing cover-ups or subtly revising designs, our method gives you the freedom to elevate your artistry." }]}>
+        <span slot="label">
+          <strong>Complete canvas restoration</strong> when clients want a fresh start.
+        </span>
+      </AccordionBtn>
+    </div>
   </div>
 </section>

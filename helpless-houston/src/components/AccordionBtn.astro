@@ -1,0 +1,141 @@
+---
+import ChevronDown from '../assets/icons/down-chevron.svg';
+
+interface Props {
+  items: { text: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<style>
+.b2b-lp-accordion {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: white;
+  border-radius: 30px; 
+  overflow: hidden; 
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.b2b-lp-accordion::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  padding: 2px;
+  background: linear-gradient(to right, rgba(220,160,121,1), rgba(130,102,157,1));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (min-width: 768px) {
+  .b2b-lp-accordion:hover {
+    background-color: rgba(220, 160, 121, 0.3);
+  }
+}
+.accordion-btn {
+  position: relative;
+  height: 100px;
+  padding: 15px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  width: 100%;
+  color: inherit;
+  font: inherit;
+  z-index: 2;
+}
+
+.accordion-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.accordion-menu > div {
+  overflow: hidden;
+  padding: 0 30px;
+}
+
+.accordion-menu p {
+  margin: 0;
+  padding: 0px 16px 16px;
+  color: white;
+  transition: color 0.2s ease;
+}
+.open .accordion-menu {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* Chevron rotation */
+.chevron {
+  transition: transform 0.3s ease;
+}
+.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* desktop hover (optional) */
+@media (min-width: 768px) {
+  .b2b-lp-accordion:hover .accordion-menu {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .b2b-lp-accordion:hover .chevron {
+    transform: rotate(180deg);
+  }
+}
+</style>
+
+<div class="b2b-lp-accordion max-w-[812px]" data-accordion>
+  <button class="accordion-btn">
+    <span class="label-text">
+      <slot name="label" />
+    </span>
+    <span class="chevron">
+      <img src={ChevronDown.src} alt="" />
+    </span>
+  </button>
+
+  <div class="accordion-menu">
+    <div>
+      {items.map((item) => (
+        <p>{item.text}</p>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  const accordions = document.querySelectorAll('[data-accordion]');
+
+  accordions.forEach((accordion) => {
+    const btn = accordion.querySelector('.accordion-btn');
+
+    btn.addEventListener('click', (e) => {
+      if (window.innerWidth < 768) {
+        e.preventDefault();
+
+        // Close all others (accordion behavior)
+        accordions.forEach((a) => a !== accordion && a.classList.remove('open'));
+
+        // Toggle current
+        accordion.classList.toggle('open');
+      }
+    });
+  });
+</script>
