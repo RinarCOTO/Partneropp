@@ -1,9 +1,16 @@
 @import "tailwindcss";
+html{
+    box-sizing: border-box;
+}
+:root {
+  --color-gradient-to-right: linear-gradient(to right, red, blue);
+}
 
 @theme {
     --color-primary: #AC52FF;
     --color-accent: #E6BA9E;
     --color-gold: #DFA985;
+    --color-gradient-to-right:linear-gradient(to right, rgba(220,160,121,1), rgba(130,102,157,1));
 }
 /* Fonts */
 @font-face {
@@ -45,9 +52,22 @@ h2{
 .font-roboto{
     font-family: 'Roboto';
 }
-p{
-    color: white;
-}
+
 .font-dmsans{
     font-family: 'DM Sans';
 }
+.slider-controller{
+    background-color: #8400FF;
+}
+    .border-color-gradient-to-right{
+        border: 1px solid transparent;
+        background: 
+        linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0)) padding-box,
+        linear-gradient(130deg, rgba(220,160,121,1), rgba(130,102,157,1)) border-box;
+        background-clip: padding-box, border-box;
+        background-origin: padding-box, border-box;
+        color: white;
+        border-radius: 20px;
+        transition: 0.3 ease;
+        
+    }

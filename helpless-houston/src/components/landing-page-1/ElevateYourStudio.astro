@@ -1,3 +1,20 @@
-<section class="pt-[80px] pr-[80px] pb-[100px]">
-    <h2>ELEVATE YOUR STUDIO'S REVENUE</h2>
+---
+import SwiperBox from '../SwiperBox'
+const slides = [
+  { text: 'Generate notable additional monthly revenue', content: ' from tattoo removal services.' },
+  { text: 'Triple-digit ROI potential', content: ' with our proven implementation model.', alt: 'Icon 2' },
+  { text: 'Slide 3', content: 'This is the third slide' },
+];
+---
+
+<section class="flex flex-col items-center mx-auto my-12">
+  <h2 class="text-2xl font-bold mb-6">ELEVATE YOUR STUDIO'S REVENUE</h2>
+  <h3 class="text-white font-roboto text-[34px] font-[600] mb-[66px]">Add a powerful new revenue stream with minimal operational changes.</h3>
+
+  <!-- React Swiper component -->
+   <p class="text-white">*to add animation</p>
+   <div class="overflow-visible pl-[80px]">
+  <SwiperBox client:load slides={slides} />
+   </div>
 </section>
+ 

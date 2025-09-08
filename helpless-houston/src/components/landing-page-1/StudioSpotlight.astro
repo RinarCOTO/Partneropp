@@ -1,0 +1,47 @@
+---
+import Carousel from "../ImagesCarousel"
+import CT1 from "../../assets/images/client-transformation-img-1.jpg"
+import CT2 from "../../assets/images/client-transformation-img-2.jpg"
+import CT3 from "../../assets/images/client-transformation-img-3.jpg"
+import { Image } from "astro:assets";
+
+// image in the carousel
+const images = [CT1, CT2, CT3];
+---
+<style>
+  .studio-spotlight {
+    position: absolute;
+    width: 352px;
+    height: 352px;
+    border-radius: 50%;
+    background: #8400FF;
+    filter: blur(250px);
+    z-index: 0;
+    /* Center horizontally and vertically */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .spotlight-section {
+    position: relative; 
+
+  }
+</style>
+
+<section class=" spotlight-section py-[100px] px-[80px] text-center space-y-[20px]">
+
+
+  <h2 class="uppercase relative z-10">STUDIO SPOTLIGHT: ETERNAL TATTOO</h2>
+  <p class="px-[131px] font-roboto text-[20px] font-[100] text-white relative z-10">
+    "We do removals after hours, when the studio is quiet. Some removals are very emotional - whether it's removing gang tattoos for a fresh start or helping someone move past trauma. That private setting lets clients feel their emotions freely. It's about creating a safe space for transformation."
+  </p>
+  <p class="text-[20px] text-white font-roboto font-semibold leading-[35px] relative z-10">
+    — Angela, Studio Manager & Removal Specialist
+  </p>
+  <div class="pt-[50px]">
+      <Carousel client:load images={images} />
+  </div>
+    <!-- background -->
+    <div class="studio-spotlight"></div>
+</section>

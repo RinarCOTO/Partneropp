@@ -1,0 +1,73 @@
+---
+import Button from "../button.astro"
+import ComprehensiveSupportBg from '../../assets/images/comprehensive-support-bg.jpg'
+---
+<style>
+    .comprehensive-support-box{
+        max-width: 257px;
+        height: 200px;
+        padding: 50px 20px 20px 20px;
+        font-size: 20px;
+        line-height: 28px;
+    }
+    .border-color-gradient-to-right:hover{
+        border: 2px solid transparent;
+    }
+    p{
+        font-family: 'Roboto';
+    }
+</style>
+
+<section class="py-[100px] px-[80px]">
+    <h2 class="uppercase md:mb-[43px]">Comprehensive support system</h2>
+    <div class="flex gap-[20px]">
+        <div class="max-w-[449px] pt-[74px] pb-[65px] px-[25px] text-white rounded-3xl"
+         style={`
+         background-image: 
+         linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
+         url('${ComprehensiveSupportBg.src}');
+         background-size: cover;`}
+         >
+            <p class="font-medium text-[22px] leading-[34px] mb-[25px]">We're an innovator, manufacturer, and partner of safe and natural tattoo removal  and skin rejuvenation technology.</p>
+            <Button label="Talk to an expert" href="#" variant="primary"/>
+            <p class="font-medium text-[20px] text-primary leading-[34px] mt-[15px]">Discuss how Tatt2away can integrate with your studio.</p>
+        </div>
+        <div class="flex flex-wrap gap-[20px]">
+            <div class="comprehensive-support-box border-color-gradient-to-right">
+                <p>
+                    <span class="font-extrabold">Comprehensive online + hands-on training</span>
+                for your entire team.</p>
+            </div>
+            <div class="comprehensive-support-box border-color-gradient-to-right">
+                <p >
+                    <span class="font-bold">Complete marketing toolkit.</span>
+                </p>
+            </div>
+            <div class="comprehensive-support-box border-color-gradient-to-right">
+                <p >
+                    <span class="font-bold">Ongoing technical support</span>
+                    and protocol updates.
+                </p>
+            </div>
+            <div class="comprehensive-support-box border-color-gradient-to-right">
+                <p >
+                    <span class="font-bold">Territory protection</span>
+                    to secure your market position.
+                </p>
+            </div>
+            <div class="comprehensive-support-box border-color-gradient-to-right">
+                <p >
+                    <span class="font-bold">Social media content templates</span>
+                    ready for your branding.
+                </p>
+            </div>
+            <div class="comprehensive-support-box border-color-gradient-to-right">
+                <p >
+                    <span class="font-bold">Step-by-step implementation guidance </span>
+                    for seamless integration.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
