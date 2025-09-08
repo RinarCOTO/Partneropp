@@ -1,5 +1,7 @@
 ---
 import "../assets/styles/global.css";
+import { fontFaces } from "../assets/fonts.js";
+
 interface Props {
     title: string;
     description: string;
@@ -15,6 +17,9 @@ const {title, description = "B2B Landing Page for inkOUT"} = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
+    
+    <!-- Inject font-face declarations with proper URLs -->
+    <style set:html={fontFaces}></style>
 </head>
 <body class="bg-black md:max-w-[90rem] mx-auto">
     <slot />
