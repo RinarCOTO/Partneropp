@@ -51,3 +51,16 @@ h2{
     transition: 0.3 ease;
     
 }
+.swiper-box-radiant-bg{
+    width: 1246px;
+height: 1246px;
+position: absolute;
+right: -384px;
+bottom: -309px;
+border-radius: 1246px;
+background: radial-gradient(50% 50% at 50% 50%, #332640 0%, rgba(7, 1, 9, 0.13) 100%);
+z-index: -1;
+}
+.swiper-box-radiant-bg-section{
+    position: relative;
+}

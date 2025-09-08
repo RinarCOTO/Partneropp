@@ -2,7 +2,7 @@
 import satoshiVariable from '/public/fonts/Satoshi-Variable.ttf';
 import robotoFlexWoff from '/public/fonts/RobotoFlex.woff2';
 import robotoFlexTtf from '/public/fonts/RobotoFlex-Variable.ttf';
-import dmSans from '/public/fonts/Dm-Sans.woff2';
+import dmSans from '/public/fonts/DMSans-VariableFont.ttf';
 
 // Export font URLs
 export const fonts = {
@@ -21,7 +21,7 @@ export const fontFaces = `
     font-display: swap;
   }
   @font-face {
-    font-family: 'Roboto';
+    font-family: 'Roboto woff';
     src: url('${robotoFlexWoff}') format('woff2');
     font-weight: 100 900;
     font-display: swap;
@@ -34,7 +34,7 @@ export const fontFaces = `
   }
   @font-face {
     font-family: 'DM Sans';
-    src: url('${dmSans}') format('woff2');
+    src: url('${dmSans}') format('truetype');
     font-weight: 700;
     font-display: swap;
   }
