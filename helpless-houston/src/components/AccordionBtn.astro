@@ -14,32 +14,25 @@ const { items } = Astro.props;
   display: flex;
   flex-direction: column;
   width: 100%;
+  border: 2px solid transparent;
+  background: 
+    linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0)) padding-box,
+    linear-gradient(130deg, rgba(220,160,121,1), rgba(130,102,157,1)) border-box;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
   color: white;
-  border-radius: 30px; 
-  overflow: hidden; 
-  transition: background-color 0.3s ease;
-  background-color: transparent;
-  z-index: 1;
-}
-
-.b2b-lp-accordion::before {
-  content: "";
-  position: absolute;
-  inset: 0;
   border-radius: 30px;
-  padding: 1px;
-  background: linear-gradient(to right, rgba(220,160,121,1), rgba(130,102,157,1));
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: 0;
+  overflow: hidden; 
+  transition: all 0.3s ease;
+  z-index: 1;
 }
 @media (min-width: 768px) {
   .b2b-lp-accordion:hover {
-    background-color: rgba(220, 160, 121, 0.3);
+    background: 
+      linear-gradient(rgba(20, 20, 20, 0.7), rgba(0, 0, 0, 0.9)) padding-box,
+      linear-gradient(130deg, rgba(220,160,121,1), rgba(220,160,121,1)) border-box;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
 }
 .accordion-btn {
