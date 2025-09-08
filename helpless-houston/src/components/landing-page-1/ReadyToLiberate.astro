@@ -1,0 +1,45 @@
+---
+import Button from "../button.astro"
+---
+<style>
+    .ready-to-liberate-bg {
+    position: absolute;
+    width: 1246px;
+    height: 932px;
+    border-radius: 50%;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(88, 64, 110, 0.80) 0%, rgba(7, 1, 9, 0.10) 100%);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .ready-to-liberate-section {
+    position: relative; 
+
+  }
+  p{
+    font-family: 'Roboto';
+    color: #FFF;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 35px;
+    letter-spacing: -0.44px;
+  }
+</style>
+
+<section class="flex flex-col justify-between items-center text-center px-[80px] py-[100px] space-y-[50px] ready-to-liberate-section">
+    <h2 class="uppercase">READY TO LIBERATE YOUR STUDIO AND REGAIN CREATIVE FREEDOM?</h2>
+    <div class="flex flex-col justify-center items-center gap-[15px]">
+        <p>Discuss how Tatt2away can integrate with your studio.</p>
+        <Button label="Talk to an expert" href="#" variant="primary"/>
+    </div>
+    <div class="flex flex-col justify-center items-center gap-[15px]">
+        <p>Already a client seeking an inkOUT provider?</p>
+        <Button label="FIND A LOCATION NEAR YOU" href="#" variant="primary"/>
+    </div>
+    <div class="ready-to-liberate-bg h-[300px] w-full"></div>
+</section>

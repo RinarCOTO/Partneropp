@@ -2,7 +2,6 @@ import React from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import ArrowOutward from '../assets/icons/arrow-outward.svg';
 import '@splidejs/react-splide/css';
-import './swiper_box.css';
 
 const SwiperBox = ({ slides }) => {
   return (

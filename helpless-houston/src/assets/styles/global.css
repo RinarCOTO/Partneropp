@@ -59,15 +59,15 @@ h2{
 .slider-controller{
     background-color: #8400FF;
 }
-    .border-color-gradient-to-right{
-        border: 1px solid transparent;
-        background: 
-        linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0)) padding-box,
-        linear-gradient(130deg, rgba(220,160,121,1), rgba(130,102,157,1)) border-box;
-        background-clip: padding-box, border-box;
-        background-origin: padding-box, border-box;
-        color: white;
-        border-radius: 20px;
-        transition: 0.3 ease;
-        
-    }
+.border-color-gradient-to-right{
+    border: 1px solid transparent;
+    background: 
+    linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0)) padding-box,
+    linear-gradient(130deg, rgba(220,160,121,1), rgba(130,102,157,1)) border-box;
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    color: white;
+    border-radius: 20px;
+    transition: 0.3 ease;
+    
+}
