@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import ArrowPrev from "../assets/icons/arrow-prev.svg";
-import ArrowNext from "../assets/icons/arrow-next.svg";
+import { ArrowButton } from "./ArrowButton";
 
 const Carousel = ({ images, autoplaySpeed = 5000, autoplay = true }) => {
   const [current, setCurrent] = useState(0);
@@ -142,34 +141,30 @@ const Carousel = ({ images, autoplaySpeed = 5000, autoplay = true }) => {
       </div>
 
       {/* Navigation arrows (outside clipping) - with increased z-index */}
-      <button
+      <ArrowButton
+        direction="prev"
         onClick={() => {
           prevSlide();
           pauseAutoplay();
         }}
-        aria-label="Previous slide"
         className={`absolute -left-2 px-3 py-2 z-20 transition-all duration-500 ease-in-out ${
           navAnimating 
             ? "top-[calc(50%+100px)] -translate-y-1/2" 
             : "top-1/2 -translate-y-1/2"
         }`}
-      >
-        <img src={ArrowPrev.src} alt="" />
-      </button>
-      <button
+      />
+      <ArrowButton
+        direction="next"
         onClick={() => {
           nextSlide();
           pauseAutoplay();
         }}
-        aria-label="Next slide"
         className={`absolute -right-2 px-3 py-2 z-20 transition-all duration-500 ease-in-out ${
           navAnimating 
             ? "top-[calc(50%+100px)] -translate-y-1/2" 
             : "top-1/2 -translate-y-1/2"
         }`}
-      >
-        <img src={ArrowNext.src} alt="" />
-      </button>
+      />
 
       {/* Pagination - dynamically positioned with animation */}
       <div 
