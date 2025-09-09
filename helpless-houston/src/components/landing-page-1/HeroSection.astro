@@ -7,6 +7,7 @@ import HeroImg2 from '../../assets/images/hero-img-2.png'
 import HeroImg3 from '../../assets/images/hero-img-3.png'
 import { Image } from "astro:assets";
 import Button from '../button.astro';
+
 ---
 <style>
     .hero-bg {
@@ -26,31 +27,46 @@ import Button from '../button.astro';
             linear-gradient(to bottom, rgba(130, 102, 157, 1), rgba(220, 160, 121, 1)) border-box;
     }
     
-    /* Animation classes */
+    /* Animation classes with focused performance optimizations */
     .hero-content {
         opacity: 0; /* Initially hidden */
+        will-change: opacity, transform; /* Focus on critical properties only */
     }
     
     .hero-logo-wrapper {
         position: relative;
         height: auto;
         margin-bottom: 2rem;
-        transition: top 0.5s ease;  /* Smooth transition fallback */
+        will-change: transform; /* Focus on critical properties only */
     }
     
     .hero-logo {
         transform-origin: center center;
-        will-change: transform;     /* Performance optimization */
+        will-change: transform, opacity; /* Focus on critical properties only */
     }
     
     .hero-images {
         opacity: 0;
+        will-change: transform, opacity; /* Focus on critical properties only */
     }
     
     /* Always show hero background */
     .hero-bg {
         opacity: 1 !important;
         visibility: visible !important;
+    }
+    
+    /* Targeted hardware acceleration for smoother animations */
+    .hero-logo-wrapper, .hero-content, .hero-images, #golden-ring-wrapper {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+    
+    /* Ensure background images are hidden until animated */
+    #golden-ring-wrapper img {
+        opacity: 0; /* Initially hidden */
+        transform-origin: left center; /* For better scaleX animation */
+        will-change: opacity, transform; /* No clipPath, only transform and opacity */
     }
 </style>
 
@@ -92,11 +108,11 @@ import Button from '../button.astro';
       <Image 
           src={GoldenRing} 
           alt="Golden Ring Background"
-          class="relative z-10 pointer-events-none" />
+          class="relative z-10 pointer-events-none opacity-0" />
       <Image 
           src={HeroBG} 
           alt="purple bg" 
-          class="absolute z-0 md:mt-[29px] pointer-events-none" />
+          class="absolute z-0 md:mt-[29px] pointer-events-none opacity-0" />
     </div>
     <div class="-z-8 hero-bg bottom-0 pointer-events-none" id="hero-bg"></div>
   </div>
@@ -104,16 +120,17 @@ import Button from '../button.astro';
 
 <!-- GSAP Animation Script -->
 <script>
-  // Wait for the page to load
-  document.addEventListener('DOMContentLoaded', () => {
-    // Import GSAP dynamically
+  // Load when the page is fully loaded for better performance
+  window.addEventListener('load', () => {
+    // Import GSAP dynamically with performance optimizations
     import('gsap').then((gsap) => {
+      // Configure GSAP for better performance
+      gsap.gsap.defaults({force3D: true}); // Force 3D transformations for better hardware acceleration
       const { gsap: animation } = gsap;
       
-      // Initial setup - make the logo larger and position it lower
+      // Initial setup - make the logo larger and position it lower (using transform)
       animation.set("#hero-logo-wrapper", {
-        position: "relative",
-        top: "80px"  // Start lower in the viewport
+        y: "80px"  // Use transform instead of top for better performance
       });
       
       animation.set("#hero-logo", { 
@@ -131,70 +148,69 @@ import Button from '../button.astro';
         opacity: 0,
         x: -60 // Start left of final position for slide-in effect
       });
-      // Set golden ring to start hidden and off-screen (only the golden ring, not the purple bg)
+      // Use transform and opacity only for golden ring, avoid clipPath
       animation.set("#golden-ring-wrapper img:first-child", {
         opacity: 0, // Initially hidden
         x: -120, // Start further left for better reveal effect
-        clipPath: "inset(0 80% 0 0)" // Initially clip most of it from view (reveal from left)
+        scaleX: 0.3 // Use scale instead of clipPath for reveal effect
       });
       
-      // Set the purple background to be initially hidden
+      // Ensure the purple background is hidden until animation (no scale change)
       animation.set("#golden-ring-wrapper img:last-child", {
-        opacity: 0 // Initially hidden
+        opacity: 0 // Completely hidden, no scale effect for a clean pop-in
       });
       
-      // Create animation timeline (no initial delay)
+      // Create animation timeline with performance-focused defaults and an initial pause
       const tl = animation.timeline({
+        delay: 0.5, // 0.5 second pause before starting the entire animation sequence
         defaults: { 
-          ease: "power3.out" 
+          ease: "power1.out", // Simpler easing function
+          duration: 0.8,      // Consistent duration
+          overwrite: "auto",  // Prevent conflicting animations
+          force3D: true       // Hardware acceleration
         }
       });
       
-      // Animate logo to normal size and position (moving upward smoothly)
+      // Use transform-based animations instead of position properties
       tl.to("#hero-logo-wrapper", {
-        top: "0",  // Move up to its final position
-        duration: 1.4,
-        ease: "power1.out" // Smoother, more linear upward motion
+        y: "-1px",  // Use transform instead of top for better performance
+        duration: 0.9,
       }, 0)
       
       .to("#hero-logo", {
         scale: 1,
-        height: "auto",
-        duration: 1.4, // Match duration with the upward movement
-        ease: "power1.out" // Smoother, more consistent easing
+        duration: 0.9
       }, 0)  // The "0" means this animation starts at the same time as the previous one
       
       // Animate the content as one unit with a parallax-like rising effect
       .to("#hero-content", {
         opacity: 1,
         y: 0, // Move to final position
-        duration: 1.2,
-        ease: "power2.out"
-      }, "-=0.8")  // More overlap with logo animation for parallax effect
+        duration: 0.8
+      }, "-=0.5")  // Adjusted timing
       
-      // Slide in golden ring from left to right with reveal effect (only the ring, not the bg)
+      // Optimize golden ring animation using only transform and opacity
       .to("#golden-ring-wrapper img:first-child", {
         opacity: 1, // Fade in
         x: 0, // Move to final position
-        clipPath: "inset(0 0% 0 0)", // Reveal fully
-        duration: 1.4, // Longer duration for smoother reveal
-        ease: "power2.out" // Smoother easing for reveal effect
-      }, "-=0.3") // Start shortly after content appears
+        scaleX: 1, // Scale to full width instead of using clipPath
+        duration: 0.8, // Shorter duration for better performance
+        ease: "power1.out" // Simplified easing
+      }, "-=0.2") // Adjusted timing
       
-      // Fade in and slide the images from left to right
+      // Group related animations together for better performance
       .to("#hero-images", {
         opacity: 1,
         x: 0, // Move to final position
-        duration: 1.0,
-        ease: "power1.out"
-      }, "-=0.8") // Start almost in sync with golden ring animation
+        duration: 0.7
+      }, "-=0.5") // Adjusted timing
       
-      // Fade in the purple background after hero images animation completes
+      // Simple fade-in animation for background (no sliding, just pop in)
       .to("#golden-ring-wrapper img:last-child", {
         opacity: 1,
-        duration: 0.8,
-        ease: "power1.in"
-      }, "+=0.2"); // Slight delay after hero images complete
+        delay: 0.3,
+        duration: 0.3 // Shorter duration for a quicker pop-in effect
+      }, "-=0.3"); // Keep same timing relative to previous animations
     });
   });
 </script>
