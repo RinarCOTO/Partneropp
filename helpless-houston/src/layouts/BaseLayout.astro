@@ -1,12 +1,18 @@
 ---
 import "../assets/styles/global.css";
 import { fontFaces } from "../assets/fonts.js";
+import BlackFavicon from '../assets/images/cropped-tatt2away-faicon-black.webp';
+import WhiteFavicon from '../assets/images/tatt2away-favicon-white.webp';
 
 interface Props {
     title: string;
     description: string;
 }   
 const {title, description = "B2B Landing Page for inkOUT"} = Astro.props;
+
+// Get the favicon paths for use in the head
+const blackFaviconPath = BlackFavicon.src;
+const whiteFaviconPath = WhiteFavicon.src;
 ---
 
 <!DOCTYPE html>
@@ -17,6 +23,22 @@ const {title, description = "B2B Landing Page for inkOUT"} = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
+    
+    <!-- Favicon for light mode -->
+    <link 
+        rel="icon" 
+        href={blackFaviconPath} 
+        type="image/webp"
+        media="(prefers-color-scheme: light)" 
+    />
+    
+    <!-- Favicon for dark mode -->
+    <link 
+        rel="icon" 
+        href={whiteFaviconPath} 
+        type="image/webp" 
+        media="(prefers-color-scheme: dark)" 
+    />
     
     <!-- Inject font-face declarations with proper URLs -->
     <style set:html={fontFaces}></style>
