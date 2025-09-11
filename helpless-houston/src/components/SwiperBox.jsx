@@ -2,7 +2,7 @@ import React from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import ArrowOutward from '../assets/icons/arrow-outward.svg';
 import '@splidejs/react-splide/css';
-
+import '././swiper-box.css';
 const SwiperBox = ({ slides }) => {
   return (
     <Splide
@@ -26,7 +26,7 @@ const SwiperBox = ({ slides }) => {
       }}
     >
       {slides.map((slide, index) => (
-        <SplideSlide key={index} className="md:h-[218px] border-color-gradient-to-right pt-[30px] pb-[70px] px-[38px]">
+        <SplideSlide key={index} className="md:h-[218px] swiper-box-card pt-[30px] pb-[70px] px-[38px]">
           <div className="flex flex-col gap-[20px]">
               <img
                 src={ArrowOutward.src}
