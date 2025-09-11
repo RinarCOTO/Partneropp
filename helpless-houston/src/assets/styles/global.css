@@ -12,12 +12,6 @@ html{
     --color-gold: #DFA985;
     --color-gradient-to-right:linear-gradient(to right, rgba(220,160,121,1), rgba(130,102,157,1));
 }
-/* Fonts */
-/* 
- * Font faces are imported from fonts.js to ensure correct paths with base URL
- * This is a comment placeholder - the actual font-face declarations are injected
- * from the BaseLayout.astro component
- */
 
 h2{
     font-family: 'Satoshi Black';
@@ -48,19 +42,4 @@ h2{
     background-origin: padding-box, border-box;
     color: white;
     border-radius: 20px;
-    transition: 0.3 ease;
-    
-}
-.swiper-box-radiant-bg{
-    width: 1246px;
-height: 1246px;
-position: absolute;
-right: -384px;
-bottom: -309px;
-border-radius: 1246px;
-background: radial-gradient(50% 50% at 50% 50%, #332640 0%, rgba(7, 1, 9, 0.13) 100%);
-z-index: -1;
-}
-.swiper-box-radiant-bg-section{
-    position: relative;
 }

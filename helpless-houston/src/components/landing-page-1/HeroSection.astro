@@ -7,7 +7,6 @@ import HeroImg2 from '../../assets/images/hero-img-2.png'
 import HeroImg3 from '../../assets/images/hero-img-3.png'
 import { Image } from "astro:assets";
 import Button from '../button.astro';
-
 ---
 <style>
     .hero-bg {
@@ -26,191 +25,43 @@ import Button from '../button.astro';
             linear-gradient(#00000000, #00000000) padding-box,
             linear-gradient(to bottom, rgba(130, 102, 157, 1), rgba(220, 160, 121, 1)) border-box;
     }
-    
-    /* Animation classes with focused performance optimizations */
-    .hero-content {
-        opacity: 0; /* Initially hidden */
-        will-change: opacity, transform; /* Focus on critical properties only */
-    }
-    
-    .hero-logo-wrapper {
-        position: relative;
-        height: auto;
-        margin-bottom: 2rem;
-        will-change: transform; /* Focus on critical properties only */
-    }
-    
-    .hero-logo {
-        transform-origin: center center;
-        will-change: transform, opacity; /* Focus on critical properties only */
-    }
-    
-    .hero-images {
-        opacity: 0;
-        will-change: transform, opacity; /* Focus on critical properties only */
-    }
-    
-    /* Always show hero background */
-    .hero-bg {
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    
-    /* Targeted hardware acceleration for smoother animations */
-    .hero-logo-wrapper, .hero-content, .hero-images, #golden-ring-wrapper {
-        transform: translateZ(0);
-        backface-visibility: hidden;
-    }
-    
-    /* Ensure background images are hidden until animated */
-    #golden-ring-wrapper img {
-        opacity: 0; /* Initially hidden */
-        transform-origin: left center; /* For better scaleX animation */
-        will-change: opacity, transform; /* No clipPath, only transform and opacity */
-    }
-</style>
 
+</style>
 <section class="relative md:h-[943px]">
   <!-- Foreground content -->
   <div class="relative z-20 flex flex-col items-center justify-center text-center mx-auto md:mt-[180px]">
-    <!-- Logo with initial animation -->
-    <div id="hero-logo-wrapper" class="hero-logo-wrapper">
-      <Image id="hero-logo" src={HeroLogo} alt="InkOUT Logo" class="hero-logo" />
+    <Image src={HeroLogo} alt="InkOUT Logo" />
+    <h1 class="text-[#DFA985] text-[36px] font-satoshi-black uppercase md:mt-[25px]">
+      Enhance your studio with safe, natural tattoo removal
+    </h1>
+    <p class="text-[28px] md:my-[35px] text-white">
+      Empower Your Tattoo Studio with Tatt2Away’s Non-Laser, <br />
+      All-Natural Ink Removal and Revision Solution.
+    </p>
+    <Button label="Talk to an expert" href="#" variant="secondary"/>
+    <div class="flex md:space-x-[140px]">
+            <Image src={HeroImg1} 
+                alt="" 
+                class="hero-img-border md:mt-[75px] md:h-[173px] md:w-[173px]" />
+            <Image src={HeroImg2} 
+                alt="" 
+                class="hero-img-border md:mt-[116px] md:h-[173px] md:w-[173px]" />
+            <Image src={HeroImg3} 
+                alt="" 
+                class="hero-img-border md:mt-[75px] md:h-[173px] md:w-[173px]" />
     </div>
-    
-    <!-- Content that appears after logo animation -->
-    <div id="hero-content" class="hero-content">
-      <h1 class="text-[#DFA985] text-[36px] font-satoshi-black uppercase md:mt-[25px]">
-        Enhance your studio with safe, natural tattoo removal
-      </h1>
-      <p class="text-[28px] md:my-[35px] text-white">
-        Empower Your Tattoo Studio with Tatt2Away's Non-Laser, <br />
-        All-Natural Ink Removal and Revision Solution.
-      </p>
-      <Button label="Talk to an expert" href="#" variant="secondary"/>
-    </div>
-    
-    <!-- Images with border that appear after content -->
-    <div id="hero-images" class="flex md:space-x-[140px] hero-images">
-      <Image src={HeroImg1} 
-          alt="Tattoo removal process image 1" 
-          class="hero-img-border md:mt-[75px] md:h-[173px] md:w-[173px]" />
-      <Image src={HeroImg2} 
-          alt="Tattoo removal process image 2" 
-          class="hero-img-border md:mt-[116px] md:h-[173px] md:w-[173px]" />
-      <Image src={HeroImg3} 
-          alt="Tattoo removal process image 3" 
-          class="hero-img-border md:mt-[75px] md:h-[173px] md:w-[173px]" />
-    </div>
-    
-    <!-- Background image -->
-    <div id="golden-ring-wrapper" class="absolute -z-10 flex items-center justify-center top-0 md:mt-[320px]">
-      <Image 
-          src={GoldenRing} 
-          alt="Golden Ring Background"
-          class="relative z-10 pointer-events-none opacity-0" />
-      <Image 
-          src={HeroBG} 
-          alt="purple bg" 
-          class="absolute z-0 md:mt-[29px] pointer-events-none opacity-0" />
-    </div>
-    <div class="-z-8 hero-bg bottom-0 pointer-events-none" id="hero-bg"></div>
+      <!-- Background image -->
+        <div class="absolute -z-10 flex items-center justify-center top-0 md:mt-[320px]">
+        <Image 
+            src={GoldenRing} 
+            alt="Golden Ring Background"
+            class="relative z-10 pointer-events-none" />
+        <Image 
+            src={HeroBG} 
+            alt="purple bg" 
+            class="absolute z-0 md:mt-[29px] pointer-events-none" />
+        </div>
+    <div class="-z-8 hero-bg bottom-0 pointer-events-none" ></div>
+
   </div>
 </section>
-
-<!-- GSAP Animation Script -->
-<script>
-  // Load when the page is fully loaded for better performance
-  window.addEventListener('load', () => {
-    // Import GSAP dynamically with performance optimizations
-    import('gsap').then((gsap) => {
-      // Configure GSAP for better performance
-      gsap.gsap.defaults({force3D: true}); // Force 3D transformations for better hardware acceleration
-      const { gsap: animation } = gsap;
-      
-      // Initial setup - make the logo larger and position it lower (using transform)
-      animation.set("#hero-logo-wrapper", {
-        y: "80px"  // Use transform instead of top for better performance
-      });
-      
-      animation.set("#hero-logo", { 
-        scale: 1.8, 
-        width: "auto", 
-        opacity: 1
-      });
-      // Set content to be initially hidden and positioned lower for parallax effect
-      animation.set("#hero-content", { 
-        opacity: 0,
-        y: 60 // Start further below for stronger parallax effect
-      });
-      // Set golden ring and hero images initially positioned to the left
-      animation.set("#hero-images", { 
-        opacity: 0,
-        x: -60 // Start left of final position for slide-in effect
-      });
-      // Use transform and opacity only for golden ring, avoid clipPath
-      animation.set("#golden-ring-wrapper img:first-child", {
-        opacity: 0, // Initially hidden
-        x: -120, // Start further left for better reveal effect
-        scaleX: 0.3 // Use scale instead of clipPath for reveal effect
-      });
-      
-      // Ensure the purple background is hidden until animation (no scale change)
-      animation.set("#golden-ring-wrapper img:last-child", {
-        opacity: 0 // Completely hidden, no scale effect for a clean pop-in
-      });
-      
-      // Create animation timeline with performance-focused defaults and an initial pause
-      const tl = animation.timeline({
-        delay: 0.5, // 0.5 second pause before starting the entire animation sequence
-        defaults: { 
-          ease: "power1.out", // Simpler easing function
-          duration: 0.8,      // Consistent duration
-          overwrite: "auto",  // Prevent conflicting animations
-          force3D: true       // Hardware acceleration
-        }
-      });
-      
-      // Use transform-based animations instead of position properties
-      tl.to("#hero-logo-wrapper", {
-        y: "-1px",  // Use transform instead of top for better performance
-        duration: 0.9,
-      }, 0)
-      
-      .to("#hero-logo", {
-        scale: 1,
-        duration: 0.9
-      }, 0)  // The "0" means this animation starts at the same time as the previous one
-      
-      // Animate the content as one unit with a parallax-like rising effect
-      .to("#hero-content", {
-        opacity: 1,
-        y: 0, // Move to final position
-        duration: 0.8
-      }, "-=0.5")  // Adjusted timing
-      
-      // Optimize golden ring animation using only transform and opacity
-      .to("#golden-ring-wrapper img:first-child", {
-        opacity: 1, // Fade in
-        x: 0, // Move to final position
-        scaleX: 1, // Scale to full width instead of using clipPath
-        duration: 0.8, // Shorter duration for better performance
-        ease: "power1.out" // Simplified easing
-      }, "-=0.2") // Adjusted timing
-      
-      // Group related animations together for better performance
-      .to("#hero-images", {
-        opacity: 1,
-        x: 0, // Move to final position
-        duration: 0.7
-      }, "-=0.5") // Adjusted timing
-      
-      // Simple fade-in animation for background (no sliding, just pop in)
-      .to("#golden-ring-wrapper img:last-child", {
-        opacity: 1,
-        delay: 0.3,
-        duration: 0.3 // Shorter duration for a quicker pop-in effect
-      }, "-=0.3"); // Keep same timing relative to previous animations
-    });
-  });
-</script>

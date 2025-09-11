@@ -89,11 +89,11 @@ const Carousel = ({ images, autoplaySpeed = 5000, autoplay = true }) => {
       onTouchEnd={resumeAutoplay}
     >
       {/* Slides wrapper with clipping + rounded corners */}
-      <div className="relative md:w-[1220px] md:h-[462px] mx-auto rounded-[30px] overflow-hidden">
+      <div className="relative md:w-[1228px] md:h-[462px] mx-auto rounded-[30px] overflow-hidden">
         {/* Overlay mask with border radius to ensure consistent rounded corners */}
         <div className="absolute inset-0 rounded-[30px] pointer-events-none z-10" 
           style={{
-            boxShadow: "0 0 0 30px white",
+            boxShadow: "0 0 0 2px white",
             margin: "-1px"
           }}
         />
@@ -113,7 +113,7 @@ const Carousel = ({ images, autoplaySpeed = 5000, autoplay = true }) => {
           return (
             <div
               key={index}
-              className="absolute w-full h-full will-change-transform rounded-[30px]"
+              className="absolute w-full h-full will-change-transform rounded-[30px] overflow-hidden"
               style={{
                 transform: `translateX(${position * 100}%)`,
                 opacity: index === current ? 1 : 0.5,
@@ -133,7 +133,7 @@ const Carousel = ({ images, autoplaySpeed = 5000, autoplay = true }) => {
                 alt={`Slide ${index + 1}`}
                 loading={index === 0 ? "eager" : "lazy"}
                 fetchPriority={index === 0 ? "high" : undefined}
-                className="w-full h-full object-contain rounded-[30px]"
+                className="w-full h-full object-cover rounded-[30px]"
               />
             </div>
           );
