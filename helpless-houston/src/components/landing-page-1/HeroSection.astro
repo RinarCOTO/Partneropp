@@ -27,50 +27,46 @@ import Button from '../button.astro';
             linear-gradient(to bottom, rgba(130, 102, 157, 1), rgba(220, 160, 121, 1)) border-box;
     }
     
-    /* Animation classes with focused performance optimizations */
     .hero-content {
-        opacity: 0; /* Initially hidden */
-        will-change: opacity, transform; /* Focus on critical properties only */
+        opacity: 0;
+        will-change: opacity, transform;
     }
     
     .hero-logo-wrapper {
         position: relative;
         height: auto;
         margin-bottom: 2rem;
-        will-change: transform; /* Focus on critical properties only */
+        will-change: transform;
     }
     
     .hero-logo {
         transform-origin: center center;
-        will-change: transform, opacity; /* Focus on critical properties only */
+        will-change: transform, opacity;
     }
     
     .hero-images {
         opacity: 0;
-        will-change: transform, opacity; /* Focus on critical properties only */
+        will-change: transform, opacity;
     }
     
-    /* Always show hero background */
     .hero-bg {
         opacity: 1 !important;
         visibility: visible !important;
     }
     
-    /* Targeted hardware acceleration for smoother animations */
     .hero-logo-wrapper, .hero-content, .hero-images, #golden-ring-wrapper {
         transform: translateZ(0);
         backface-visibility: hidden;
     }
     
-    /* Ensure background images are hidden until animated */
     #golden-ring-wrapper img {
-        opacity: 0; /* Initially hidden */
-        transform-origin: left center; /* For better scaleX animation */
-        will-change: opacity, transform; /* No clipPath, only transform and opacity */
+        opacity: 0;
+        transform-origin: left center;
+        will-change: opacity, transform;
     }
 </style>
 
-<section class="relative md:h-[943px]">
+<section class="relative h-dvh md:h-[943px]">
   <!-- Foreground content -->
   <div class="relative z-20 flex flex-col items-center justify-center text-center mx-auto md:mt-[180px]">
     <!-- Logo with initial animation -->
@@ -80,10 +76,10 @@ import Button from '../button.astro';
     
     <!-- Content that appears after logo animation -->
     <div id="hero-content" class="hero-content">
-      <h1 class="text-[#DFA985] text-[36px] font-satoshi-black uppercase md:mt-[25px]">
+      <h1 class="text-[#DFA985] text-2xl md:text-[36px] font-satoshi-black uppercase md:mt-[25px]">
         Enhance your studio with safe, natural tattoo removal
       </h1>
-      <p class="text-[28px] md:my-[35px] text-white">
+      <p class="text-[18px] md:text-[28px] md:my-[35px] text-white">
         Empower Your Tattoo Studio with Tatt2Away's Non-Laser, <br />
         All-Natural Ink Removal and Revision Solution.
       </p>
@@ -94,13 +90,13 @@ import Button from '../button.astro';
     <div id="hero-images" class="flex md:space-x-[140px] hero-images">
       <Image src={HeroImg1} 
           alt="Tattoo removal process image 1" 
-          class="hero-img-border md:mt-[75px] md:h-[173px] md:w-[173px]" />
+          class="hero-img-border h-[80px] w-[80px] md:mt-[75px] md:h-[173px] md:w-[173px]" />
       <Image src={HeroImg2} 
           alt="Tattoo removal process image 2" 
-          class="hero-img-border md:mt-[116px] md:h-[173px] md:w-[173px]" />
+          class="hero-img-border h-[80px] w-[80px] md:mt-[116px] md:h-[173px] md:w-[173px]" />
       <Image src={HeroImg3} 
           alt="Tattoo removal process image 3" 
-          class="hero-img-border md:mt-[75px] md:h-[173px] md:w-[173px]" />
+          class="hero-img-border h-[80px] w-[80px] md:mt-[75px] md:h-[173px] md:w-[173px]" />
     </div>
     
     <!-- Background image -->

@@ -7,56 +7,40 @@ const Carousel = ({ images, autoplaySpeed = 5000, autoplay = true }) => {
   const totalSlides = images.length;
   const autoplayTimerRef = useRef(null);
 
-  // Track animation state to prevent rapid clicks during transition
-  const [isAnimating, setIsAnimating] = useState(false);
+  // Animation constants
+  const ANIMATION_DURATION = 600;
   
-  // Track when navigation buttons should animate
+  // Animation state tracking
+  const [isAnimating, setIsAnimating] = useState(false);
   const [navAnimating, setNavAnimating] = useState(false);
   
-  // Function to advance to the next slide with animation lock
+  // Helper to handle animation state for all slide changes
+  const handleSlideChange = (updateCurrentFn) => {
+    if (isAnimating) return; // Prevent rapid clicking
+    
+    setIsAnimating(true);
+    setNavAnimating(true);
+    
+    // Update slide with the provided function
+    updateCurrentFn();
+    
+    // Release animation locks after transitions complete
+    setTimeout(() => setIsAnimating(false), ANIMATION_DURATION);
+    setTimeout(() => setNavAnimating(false), ANIMATION_DURATION);
+  };
+  
+  // Navigation functions using the common handler
   const nextSlide = () => {
-    if (isAnimating) return; // Prevent rapid clicking during animation
-    setIsAnimating(true);
-    setNavAnimating(true);
-    
-    // Move to next slide
-    setCurrent((prev) => (prev + 1) % totalSlides);
-    
-    // Release animation locks after transitions complete
-    setTimeout(() => setIsAnimating(false), 600);
-    
-    // Reset navigation and pagination animation after completion
-    setTimeout(() => setNavAnimating(false), 600);
+    handleSlideChange(() => setCurrent((prev) => (prev + 1) % totalSlides));
   };
   
-  // Previous function with animation lock
   const prevSlide = () => {
-    if (isAnimating) return; // Prevent rapid clicking during animation
-    setIsAnimating(true);
-    setNavAnimating(true);
-    
-    setCurrent((prev) => (prev - 1 + totalSlides) % totalSlides);
-    
-    // Release animation locks after transitions complete
-    setTimeout(() => setIsAnimating(false), 600);
-    
-    // Reset navigation and pagination animation after completion
-    setTimeout(() => setNavAnimating(false), 600);
+    handleSlideChange(() => setCurrent((prev) => (prev - 1 + totalSlides) % totalSlides));
   };
   
-  // Direct navigation with animation lock
   const goToSlide = (index) => {
-    if (isAnimating || index === current) return; // Prevent during animation or if clicking current
-    setIsAnimating(true);
-    setNavAnimating(true);
-    
-    setCurrent(index);
-    
-    // Release animation locks after transitions complete
-    setTimeout(() => setIsAnimating(false), 600);
-    
-    // Reset navigation and pagination animation after completion 
-    setTimeout(() => setNavAnimating(false), 600);
+    if (index === current) return; // Don't change if already on this slide
+    handleSlideChange(() => setCurrent(index));
   };
   
   // Setup and cleanup for autoplay functionality
@@ -98,17 +82,8 @@ const Carousel = ({ images, autoplaySpeed = 5000, autoplay = true }) => {
           }}
         />
         {images.map((image, index) => {
-          // Calculate the position more intelligently for a smoother right-to-left flow
-          // Current slide is at 0%, next slide is at 100%, others are positioned intelligently
-          let position;
-          
-          if (index === current) {
-            position = 0; // Current slide centered
-          } else if (index === (current + 1) % totalSlides) {
-            position = 1; // Next slide to the right
-          } else {
-            position = 1; // All others to the right, but hidden with display:none
-          }
+          // Simple position logic - current slide at 0, all others at 100%
+          const position = index === current ? 0 : 1;
           
           return (
             <div
@@ -117,8 +92,7 @@ const Carousel = ({ images, autoplaySpeed = 5000, autoplay = true }) => {
               style={{
                 transform: `translateX(${position * 100}%)`,
                 opacity: index === current ? 1 : 0.5,
-                // Improved animation timing function for smoother transitions
-                transition: 'transform 600ms cubic-bezier(0.25, 0.1, 0.25, 1), opacity 500ms ease-out',
+                transition: `transform ${ANIMATION_DURATION}ms cubic-bezier(0.25, 0.1, 0.25, 1), opacity 500ms ease-out`,
                 // Hide slides that aren't current or next for better performance
                 display: index === current || index === (current + 1) % totalSlides ? 'block' : 'none',
                 // Hardware acceleration for smoother animations

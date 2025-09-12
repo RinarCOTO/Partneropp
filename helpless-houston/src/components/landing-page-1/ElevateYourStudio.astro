@@ -17,12 +17,24 @@ const slides = [
   section.elevate-studio::before {
     content: '';
     position: absolute;
-    top: -308px;
-    left: 578px;
-    background: radial-gradient(50% 50% at 50% 50%, #332640 0%, rgba(7, 1, 9, 0.13) 70%);
-    width: 1246px;
-    height: 1246px;
     z-index: -1;
+    background: radial-gradient(50% 50% at 50% 50%, #332640 0%, rgba(7, 1, 9, 0.13) 70%);
+    
+    /* Mobile styles - smaller background that fits mobile screens */
+    width: 100vw;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Desktop styles - original fixed positioning */
+    @media (min-width: 768px) {
+      width: 1246px;
+      height: 1246px;
+      top: -308px;
+      left: 578px;
+      transform: none;
+    }
   }
 </style>
 <section class="elevate-studio flex flex-col items-center mx-auto my-12">
@@ -31,7 +43,7 @@ const slides = [
 
   <!-- React Swiper component -->
    <p class="text-white">*to add animation</p>
-   <div class="overflow-visible pl-[80px]">
+   <div class="md:overflow-visible overflow-x-hidden pl-[80px]">
      <SwiperBox client:load slides={slides} />
    </div>
 </section>
